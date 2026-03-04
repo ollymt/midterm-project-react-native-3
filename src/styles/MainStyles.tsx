@@ -8,16 +8,24 @@ export const getStyles = (theme) =>
       backgroundColor: theme.background, // Use theme background
     },
     button: {
-      borderRadius: 4,
+      borderRadius: 6,
+      paddingHorizontal: 16,
+      paddingVertical: 8,
     },
     buttonPrimary: {
       backgroundColor: theme.primary,
+    },
+    buttonPrimaryText: {
       color: theme.primaryText,
       fontSize: 16,
       fontWeight: "bold",
       textAlign: "center",
-      paddingHorizontal: 16,
-      paddingVertical: 4,
+    },
+    buttonSecondaryText: {
+      color: theme.text,
+      fontSize: 16,
+      fontWeight: "bold",
+      textAlign: "center",
     },
     buttonSecondary: {
       backgroundColor: "transparent", // Fixed "none" to "transparent"
@@ -25,10 +33,11 @@ export const getStyles = (theme) =>
       fontSize: 16,
       fontWeight: "bold",
       textAlign: "center",
-      padding: 2,
+      borderWidth: 2,
     },
     buttonFullWidth: {
-      position: "absolute",
+      width: "100%",
+      flex: 1,
       bottom: 0,
       marginBottom: 16,
       paddingVertical: 10,
@@ -37,16 +46,19 @@ export const getStyles = (theme) =>
     },
     card: {
       flex: 1,
+      flexDirection: "column",
       backgroundColor: theme.card, // Dynamic card background
       width: "100%",
+      minHeight: 40,
       height: "auto",
       padding: 10,
       borderRadius: 10,
+      marginBottom: 10,
       // Adjust shadow for dark mode
-      shadowColor: theme.isDarkMode ? "#000" : "#999",
+      /*shadowColor: theme.isDarkMode ? "#000" : "#999",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: theme.isDarkMode ? 0.5 : 0.2,
-      shadowRadius: 4,
+      shadowRadius: 4,*/
       elevation: 3, // Required for Android shadows
     },
     homeScreen: {
@@ -54,8 +66,9 @@ export const getStyles = (theme) =>
       backgroundColor: theme.background,
     },
     cardItemName: {
-      fontSize: 14,
-      paddingTop: 6,
+      fontSize: 20,
+      paddingVertical: 6,
+      fontWeight: "bold",
       color: theme.text,
     },
     cardItemPrice: {

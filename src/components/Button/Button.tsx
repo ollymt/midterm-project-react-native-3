@@ -31,7 +31,7 @@ export default function Button({
     >
       <Text
         style={[
-          variant == "primary" ? styles.buttonPrimary : styles.buttonSecondary,
+          variant == "primary" ? styles.buttonPrimaryText : styles.buttonSecondaryText,
         ]}
       >
         {text}
