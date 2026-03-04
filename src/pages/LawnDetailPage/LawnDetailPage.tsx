@@ -39,7 +39,7 @@ export default function LawnDetailPage({ route, navigation }) {
       <RenderHtml
         source={{ html: job.description }} // This is your HTML string from the API
       />
-      <View style={{ marginVertical: "20", gap: 4 }}>
+      <View style={{ marginTop: "20", gap: 4, marginBottom: "60" }}>
         <Button
           variant="primary"
           text="Apply"
