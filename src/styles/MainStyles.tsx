@@ -21,6 +21,10 @@ export const getStyles = (theme) =>
       fontWeight: "bold",
       textAlign: "center",
     },
+    textSecondary: {
+      color: theme.text,
+      opacity: 0.5,
+    },
     buttonSecondaryText: {
       color: theme.text,
       fontSize: 16,
@@ -34,6 +38,7 @@ export const getStyles = (theme) =>
       fontWeight: "bold",
       textAlign: "center",
       borderWidth: 2,
+      borderColor: theme.text
     },
     buttonFullWidth: {
       width: "100%",
@@ -58,8 +63,8 @@ export const getStyles = (theme) =>
       /*shadowColor: theme.isDarkMode ? "#000" : "#999",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: theme.isDarkMode ? 0.5 : 0.2,
-      shadowRadius: 4,*/
-      elevation: 3, // Required for Android shadows
+      shadowRadius: 4,
+      elevation: 3, // Required for Android shadows */
     },
     homeScreen: {
       flex: 1,
@@ -178,5 +183,32 @@ export const getStyles = (theme) =>
       fontWeight: "bold",
       padding: 10,
       fontSize: 18,
+    },
+
+    inputContainer: {
+      flex: 1,
+      flexDirection: "column",
+      backgroundColor: theme.background, // Dynamic card background
+      width: "100%",
+      minHeight: 40,
+      // height: "auto",
+      padding: 10,
+      borderRadius: 10,
+      marginBottom: 10,
+    },
+
+    input: {
+      flex: 1,
+      flexDirection: "column",
+      backgroundColor: theme.background, // Dynamic card background
+      width: "100%",
+      minHeight: 40,
+      // height: "auto",
+      padding: 10,
+      borderRadius: 10,
+      marginBottom: 10,
+      textAlignVertical: "top",
+      alignContent: "flex-start",
+      justifyContent: "flex-start",
     },
   });

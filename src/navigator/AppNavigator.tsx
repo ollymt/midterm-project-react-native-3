@@ -10,13 +10,39 @@ import LawnsPage from "../pages/LawnsPage/LawnsPage";
 import SavedLawnsPage from "../pages/SavedLawns/SavedLawns";
 import SettingsPage from "../pages/SettingsPage/SettingsPage";
 import LawnDetailPage from "../pages/LawnDetailPage/LawnDetailPage";
+import { useTheme } from "../contexts/ThemeContext";
+import { getStyles } from "../styles/MainStyles";
+import { StatusBar } from "expo-status-bar";
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <StatusBar style={theme.isDarkMode ? "light" : "dark"} />
+      <Stack.Navigator
+        screenOptions={{
+          // 1. Background color of the header
+          headerStyle: {
+            backgroundColor: theme.background, // or theme.card
+            elevation: 0, // Removes shadow on Android
+            shadowOpacity: 0, // Removes shadow on iOS
+            borderBottomWidth: 1,
+            borderBottomColor: theme.border,
+          },
+          // 2. Color of the Title text
+          headerTitleStyle: {
+            color: theme.text,
+            fontFamily: "Your-Font-Bold", // If you use custom fonts
+          },
+          // 3. Color of the Back button and icons
+          headerTintColor: theme.primary,
+          // 4. Background color of the page behind the header
+          headerShadowVisible: false,
+        }}
+      >
         <Stack.Screen name="Lawns" component={LawnsPage} />
         <Stack.Screen name="Saved Lawns" component={SavedLawnsPage} />
         <Stack.Screen name="Settings" component={SettingsPage} />

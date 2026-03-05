@@ -15,7 +15,7 @@ export default function App() {
   return (
     <LawnProvider>
       <ThemeProvider>
-        <SafeAreaProvider style={{ flex: 1 }}>
+        <SafeAreaProvider style={{ flex: 1 }}>\
           <AppNavigator />
         </SafeAreaProvider>
       </ThemeProvider>

@@ -5,8 +5,9 @@ import { LawnContext } from "../../contexts/useLawnData";
 import LawnCard from "../../components/LawnCard/LawnCard";
 import { getStyles } from "../../styles/MainStyles";
 import { useTheme } from "../../contexts/ThemeContext";
+import * as Haptics from "expo-haptics";
 
-export default function SavedLawnsPage() {
+export default function SavedLawnsPage({ navigation }) {
   const { items, refreshing, fetchApiData, loading } = useContext(LawnContext);
   const { theme } = useTheme();
   const styles = getStyles(theme);
@@ -22,13 +23,17 @@ export default function SavedLawnsPage() {
         renderItem={({ item }) => (
           <LawnCard
             {...item}
-            onPress={() => navigation.navigate("Lawn Details", { job: item })}
+            navigation={navigation}
+            onPress={() => {
+              navigation.navigate("Lawn Details", { job: item })
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
+            }}
           />
         )}
         // Adds space at the bottom so the last card isn't cut off
         contentContainerStyle={{ paddingBottom: 20 }}
         ListEmptyComponent={
-            <Text style={{ textAlign: "center" }}>You have no saved lawns.</Text>
+            <Text style={{ textAlign: "center", color: theme.textSecondary }}>You have no saved lawns.</Text>
         }
       />
     </View>

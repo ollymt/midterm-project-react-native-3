@@ -21,6 +21,7 @@ interface CardProps {
   onPress?: () => void;
   id: string;
   isSaved: boolean;
+  navigation?: any; // Add navigation to props
 }
 
 export default function LawnCard({
@@ -38,10 +39,11 @@ export default function LawnCard({
   onPress,
   id,
   isSaved,
+  navigation, // Receive navigation as a prop, not as a second parameter
 }: CardProps) {
   const { theme } = useTheme();
   const styles = getStyles(theme);
-  const { items, loading, toggleSaved } = useContext(LawnContext);
+  const { toggleSaved } = useContext(LawnContext);
 
   // Helper to format salary (e.g., 5000 -> 5k)
   const formatSalary = (num: number) =>
@@ -51,11 +53,12 @@ export default function LawnCard({
     // Prevents the whole card's onPress from firing when clicking the button
     e.stopPropagation();
 
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    Alert.alert(
-      "Application Sent",
-      `You've applied for the ${title} position at ${companyName}!`,
-    );
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
+
+    // Check if navigation exists before using it
+    if (navigation) {
+      navigation.navigate("Apply");
+    }
   };
 
   return (
@@ -64,7 +67,7 @@ export default function LawnCard({
       <Image
         source={{ uri: companyLogo }}
         style={{
-          width: 50, // Logos usually look better as smaller squares or circles
+          width: 50,
           height: 50,
           borderRadius: 8,
           marginBottom: 10,
@@ -79,7 +82,7 @@ export default function LawnCard({
           {title}
         </Text>
 
-        <Text style={{ color: theme.textSecondary, fontSize: 14 }}>
+        <Text style={{ color: theme.text, fontSize: 14 }}>
           {companyName} • {workModel}
         </Text>
       </View>
@@ -102,11 +105,14 @@ export default function LawnCard({
           style={{ flex: 1 }}
         />
         <Button
-          variant="secondary"
+          variant={"secondary"}
           enabled={true}
-          text={(isSaved ? "Saved" : "Save")}
+          text={isSaved ? "Saved" : "Save"}
           style={{ flex: 1 }}
-          onPress={() => { toggleSaved(id) }}
+          onPress={() => {
+            toggleSaved(id);
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+          }}
         />
       </View>
     </Pressable>

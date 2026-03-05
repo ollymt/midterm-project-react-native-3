@@ -4,6 +4,7 @@ import { useTheme } from "../../contexts/ThemeContext";
 import { useContext, useState } from "react";
 import { LawnContext } from "../../contexts/useLawnData";
 import LawnCard from "../../components/LawnCard/LawnCard";
+import * as Haptics from "expo-haptics";
 
 export default function LawnsPage({ navigation }) {
   const { items, refreshing, fetchApiData, loading } = useContext(LawnContext);
@@ -44,7 +45,10 @@ export default function LawnsPage({ navigation }) {
       <View style={{ height: 55, flexDirection: "row", gap: 10 }}>
         <Pressable
           style={[styles.card, { padding: 0, height: 45, flex: 2, justifyContent: "center" }]} // Added margin so it doesn't touch the list
-          onPress={() => navigation.navigate("Saved Lawns")}
+          onPress={() => {
+            navigation.navigate("Saved Lawns")
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)
+          }}
         >
           <Text
             style={[
@@ -58,7 +62,10 @@ export default function LawnsPage({ navigation }) {
 
         <Pressable
           style={[styles.card, { padding: 0, height: 45, flex: 1, justifyContent: "center" }]} // Added margin so it doesn't touch the list
-          onPress={() => navigation.navigate("Settings")}
+          onPress={() => {
+            navigation.navigate("Settings")
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
+          }}
         >
           <Text
             style={[
@@ -82,6 +89,7 @@ export default function LawnsPage({ navigation }) {
             paddingHorizontal: 15,
             color: theme.text,
           }}
+          keyboardAppearance={theme.isDarkMode ? "dark" : "light"}
           value={searchQuery}
           onChangeText={setSearchQuery} // Updates state as you type
         />
@@ -94,7 +102,11 @@ export default function LawnsPage({ navigation }) {
         renderItem={({ item }) => (
           <LawnCard
             {...item}
-            onPress={() => navigation.navigate("Lawn Details", { job: item })}
+            navigation={navigation}
+            onPress={() => {
+              navigation.navigate("Lawn Details", { job: item })
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
+            }}
           />
         )}
         refreshControl={
